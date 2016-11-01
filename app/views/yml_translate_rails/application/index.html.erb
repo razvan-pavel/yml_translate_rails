@@ -1,0 +1,64 @@
+<title>Yml Translate Rails</title>
+<%= stylesheet_link_tag    'yml_translate_rails/application', media: 'all' %>
+<%= javascript_include_tag 'yml_translate_rails/application' %>
+
+<% if flash[:notice].present? %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<% if @yml_file_names && @yml_files %>
+  <%= form_tag application_export_path do %>
+    <h1>Export as yml files</h1>
+
+    <%= link_to "Select new files", root_path %>
+    <br/>
+
+    <%= submit_tag "Export files" %>
+    <% @yml_file_urls.each_with_index do |i, index| %>
+      <%= hidden_field_tag "yml_file_urls[]", i %>
+      <%= hidden_field_tag "main_key[]", @yml_files[index].keys.first %>
+    <% end %>
+    <br/>
+    <hr/>
+    <%= render partial: "yml_row", locals: {key_val: @yml_file_struct, up_path: []} %>
+  <% end %>
+
+  <div class="completion">
+    <%= link_to "Highlight incomplete fields", "javascript:highlight_incomplete();" %>
+    <% @yml_file_names.each_with_index do |i, index| %>
+      <div class="completion_container" data-mainkey="<%= @yml_files[index].keys.first %>">
+        <h3><%= i %></h3>
+        <div class="completion_percent"></div>
+        <div class="completion_bar"></div>
+      </div>
+    <% end %>
+  </div>
+
+<% else %>
+  <%= form_tag application_index_path, class: "yml_files" do %>
+    <h1>Select your yml files</h1>
+    <%= select_tag :yml_files, options_for_select(@all_yml_files.map { |i| [i.split("/config/locales/").last, i] }), multiple: true %>
+    <br/>
+    <%= submit_tag "Submit" %>
+  <% end %>
+
+  <%= form_tag application_new_file_path, class: "yml_files" do %>
+    <h1>Create a new your yml file</h1>
+    <%= text_field_tag :file_name, nil, placeholder: "File name" %>
+    <%= text_field_tag :language, nil, placeholder: "Language(short)" %>
+    <br/>
+    <%= submit_tag "Create it" %>
+  <% end %>
+
+  <br style="clear: both;">
+  <br>
+  <ul>
+    <li>Do not select two files with the same language</li>
+    <li>Each file should contain one single language</li>
+    <!-- <li>If you want to add a new language you must create a new yml file(with language key only) and then select it(the fields will complete automaticaly)</li> -->
+    <li>Use arrow buttons to navigate the dropdown options</li>
+    <li>Use enter or tab button to select a option</li>
+    <li>If you want to move to the next field with tab you have to press the space button at the end of text. This will cancel the dropdown selection, move you to the next field and delete the space</li>
+    <li>Blank spaces at the end of fields will be deleted automaticaly</li>
+  </ul>
+<% end %>

@@ -1,0 +1,24 @@
+<% if key_val.is_a? Hash %>
+  <% key_val.each do |k, v| %>
+    <% if up_path.length == 0 %>
+      <br/>
+    <% end %>
+    <div class="yml_row">
+      <div class="spacer" style="width: <%= 20*up_path.length %>px;">&nbsp;</div>
+      <b class="key_name"><%= k %>:</b>
+      <%= link_to "Add row", "javascript:void(0);", class: "add_yml_row", tabindex: -1 %>
+      <%= link_to "Remove row", "javascript:void(0);", class: "remove_yml_row", tabindex: -1 %>
+      <br/>
+    </div>
+    <%= render partial: "yml_row", locals: {key_val: v, up_path: up_path+[k]} %>
+  <% end %>
+<% elsif @yml_files %>
+  <div class="yml_row">
+    <div class="spacer" style="width: <%= 20*up_path.length %>px;">&nbsp;</div>
+    <% @yml_files.each do |i| %>
+      <%= i.keys.first %>
+      <%= text_field_tag get_yml_name(i.keys+up_path), get_yml_value(i.values.first, up_path), class: "tokenized" %>
+    <% end %>
+    <br/>
+  </div>
+<% end %>

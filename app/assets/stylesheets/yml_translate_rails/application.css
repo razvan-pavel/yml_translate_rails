@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ECECEA;
+}
+
+.notice, ul {
+  background-color: #74AFAD;
+  padding: 5px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+form {
+  padding-left: 10px;
+}
+
+select#yml_files {
+  width: 400px;
+  height: 200px;
+}
+
+.incomplete {
+  border: 2px solid #dccb00;
+  background-color: #ffff78;
+}
+
+.yml_unnamed .spacer {
+  background-color: #C52F24;
+}
+
+.spacer {
+  display: inline-block;
+  background-color: #558C89;
+  border-right: 2px solid #2E7B77;
+  margin-right: 5px;
+}
+
+.completion {
+  width: 250px;
+  text-align: center;
+  background-color: #558C89;
+  color: #FFF;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+.completion .completion_container {
+  padding: 5px;
+  border-bottom: 2px solid #FFF;
+}
+.completion .completion_container .completion_bar {
+  height: 10px;
+  background-color: #C52F24;
+}
+.completion .completion_container:last-child {
+  border-bottom: none;
+}
+
+.tokenized {
+  margin-right: 20px;
+  width: 400px;
+}
+
+#tokenized_dropdown {
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #558C89;
+  z-index: 1000;
+  display: none;
+  max-height: 250px;
+  color: #FFF;
+}
+#tokenized_dropdown .selected {
+  background-color: #74AFAD;
+  font-weight: bold;
+}
+
+.key_name {
+  cursor: pointer;
+}
+.key_name .key_name_ok {
+  padding: 0px 10px 1px 10px !important;
+}
+.key_name:hover {
+  background-color: yellow;
+}
+
+.yml_row, hr {
+  margin-left: -10px;
+}
+
+.add_yml_row, .remove_yml_row {
+  display: none;
+  color: #D9853B;
+  font-weight: bold;
+  margin-left: 20px;
+}
+.yml_row:hover .add_yml_row, .yml_row:hover .remove_yml_row {
+  display: inline;
+}
+
+a:not(.add_yml_row):not(.remove_yml_row), [type=submit] {
+  padding: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #FFF;
+  margin: 10px 0px 5px 0px;
+  display: inline-block;
+  background: rgb(217,133,59);
+  background: -moz-linear-gradient(top,  rgba(217,133,59,1) 0%, rgba(214,99,0,1) 100%);
+  background: -webkit-linear-gradient(top,  rgba(217,133,59,1) 0%,rgba(214,99,0,1) 100%);
+  background: linear-gradient(to bottom,  rgba(217,133,59,1) 0%,rgba(214,99,0,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9853b', endColorstr='#d66300',GradientType=0 );
+}
+
+h1 {
+  color: #2e7b77;
+}
+
+form.yml_files {
+  float: left;
+  margin-right: 100px;
+}
