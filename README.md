@@ -38,7 +38,9 @@ mount YmlTranslateRails::Engine => "/yml_translate_rails"
 
 **Optional** Add this in your **/config/initializers/yml_translate_rails.rb** file to configure the environments were the UI will be available(defaults to development):
 ```ruby
-YmlTranslateRails.configure {|config| config.environments = ["development"] }
+YmlTranslateRails.configure do |config|
+  config.environments = ["development"]
+end
 ```
 
 ## Contribue
