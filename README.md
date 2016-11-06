@@ -31,9 +31,11 @@ And then execute:
 $ bundle install
 ```
 
-Add this in your **/config/routes.rb** file:
+Add this in your **/config/routes.rb** file(and please configure the environments for your needs):
 ```ruby
-mount YmlTranslateRails::Engine => "/yml_translate_rails"
+if Rails.env.development?
+  mount YmlTranslateRails::Engine => "/yml_translate_rails"
+end
 ```
 
 **Optional** Add this in your **/config/initializers/yml_translate_rails.rb** file to configure the environments were the UI will be available(defaults to development):
