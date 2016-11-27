@@ -1,7 +1,7 @@
 # YmlTranslateRails
 * An easy way to edit/create I18n yml files for your rails application
 * UI interface right on your rails server to change the translations on the run(can be configured on what environments will be available, defaults to development only)
-* Before installing this gem you should check this demo [http://rzone.herokuapp.com/yml_translate](http://rzone.herokuapp.com/yml_translate) (sorry if you have to wait a while for this website to load, it's not a gem related issue, it's because of the heroku's sleeping dynos feature)
+* Before installing this gem you should check this demo [https://rzone.herokuapp.com/yml_translate](https://rzone.herokuapp.com/yml_translate) (sorry if you have to wait a while for this website to load, it's not a gem related issue, it's because of the heroku's sleeping dynos feature)
 
 
 ## Usage
