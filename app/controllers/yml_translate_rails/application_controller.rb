@@ -6,7 +6,7 @@ module YmlTranslateRails
     before_action :check_env
 
     def index
-      @all_yml_files = Dir["#{Rails.root}/config/locales/**/*"]
+      @all_yml_files = Dir["#{Rails.root}/config/locales/**/*"].sort
 
       if request.post?
         @yml_file_urls = params[:yml_files]
@@ -30,11 +30,11 @@ module YmlTranslateRails
         main_key = params[:main_key][index]
 
         File.open(i, "w") do |f|
-          f.write Hash[main_key, params[main_key]].to_yaml(line_width: -1)
-                                                  .gsub(/\ \!ruby.+/, "")
-                                                  .gsub("---\n", "")
-                                                  .gsub(/\Aparameters/, main_key)
-                                                  .gsub("permitted: false", "")
+          f.write Hash[main_key, params[main_key].try(:permit!).to_h].to_yaml(line_width: -1)
+                                                                      .gsub(/\ \!ruby.+/, "")
+                                                                      .gsub("---\n", "")
+                                                                      .gsub(/\Aparameters/, main_key)
+                                                                      .gsub("permitted: false", "")
         end
       end
 
@@ -42,7 +42,7 @@ module YmlTranslateRails
     end
 
     def new_file
-      params[:file_name] = "#{params[:file_name]}.yml" unless params[:file_name].ends_with?(".yml")
+      params[:file_name] = "#{params[:file_name]}.#{params[:language]}.yml" unless params[:file_name].ends_with?(".yml")
 
       File.open("#{Rails.root}/config/locales/#{params[:file_name]}", "w") do |f|
         f.write Hash[params[:language], nil].to_yaml(line_width: -1).gsub("---\n", "")
